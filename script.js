@@ -58,6 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modal && modalTriggers && closeModalBtn) {
         const openModal = (e) => {
             e.preventDefault();
+            const program = e.currentTarget.getAttribute('data-program');
+            const programSelect = document.getElementById('modal-program');
+            
+            if (program && programSelect) {
+                programSelect.value = program;
+            } else if (programSelect) {
+                programSelect.value = ""; // Default to "Select a program" for generic buttons
+            }
+            
             modal.classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevent scrolling
         };
