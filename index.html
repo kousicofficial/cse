@@ -11,6 +11,8 @@
     <meta property="og:description" content="Learn programming, AI, and software development through practical labs and projects at SCSVMV Kanchipuram with placement training." />
     <meta property="og:type" content="website" />
     <link rel="stylesheet" href="style.css" />
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 
 <body>
@@ -1799,7 +1801,7 @@
                         <p class="contact-sub">Fill in your details and our admissions team will reach out within 24
                             hours.</p>
                     </div>
-                    <form class="contact-form" id="contactForm" novalidate>
+                    <form class="contact-form" id="contact-form" novalidate>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Full Name</label>
@@ -1830,8 +1832,8 @@
                             <textarea id="message" name="message" rows="3"
                                 placeholder="Your questions or message..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-full">
-                            Send Enquiry
+                        <button type="submit" id="contact-submit-btn" class="btn btn-primary btn-lg btn-full">
+                            Send Message
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" aria-hidden="true">

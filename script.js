@@ -98,30 +98,79 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------------------------
-    // Form Submission Handling (Generic)
+    // EmailJS Initialisation
     // -------------------------------------------------------------
-    const forms = document.querySelectorAll('.contact-form');
-    forms.forEach(form => {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
+    emailjs.init("KCLDqvxFc09RZMMLk");
+
+    // -------------------------------------------------------------
+    // Contact Form — EmailJS Submission
+    // -------------------------------------------------------------
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const submitBtn = document.getElementById('contact-submit-btn');
+            const originalHTML = submitBtn.innerHTML;
+
+            // Disable button and show sending state
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Sending...';
 
-            // Simulate form submission
+            // Collect field values
+            const name    = document.getElementById('name').value;
+            const email   = document.getElementById('email').value;
+            const phone   = document.getElementById('phone').value;
+            const program = document.getElementById('program').value;
+            const message = document.getElementById('message').value;
+
+            // Send via EmailJS
+            emailjs.send("service_rcztqrn", "template_ingxxq9", {
+                name:    name,
+                email:   email,
+                phone:   phone,
+                program: program,
+                message: message
+            })
+            .then(function () {
+                alert('Admission enquiry sent successfully');
+                contactForm.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalHTML;
+            })
+            .catch(function (error) {
+                alert('Failed to send enquiry');
+                console.error('EmailJS error:', error);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalHTML;
+            });
+        });
+    }
+
+    // -------------------------------------------------------------
+    // Modal Form Submission (keeps existing UX, no EmailJS)
+    // -------------------------------------------------------------
+    const modalForm = document.getElementById('modalForm');
+    if (modalForm) {
+        modalForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = modalForm.querySelector('button[type="submit"]');
+            const originalHTML = submitBtn.innerHTML;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending...';
+
             setTimeout(() => {
                 alert('Thank you! Your enquiry has been received. Our team will contact you soon.');
-                form.reset();
+                modalForm.reset();
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-                
+                submitBtn.innerHTML = originalHTML;
+
                 if (modal && modal.classList.contains('active')) {
                     modal.classList.remove('active');
                     document.body.style.overflow = '';
                 }
             }, 1000);
         });
-    });
+    }
 });
