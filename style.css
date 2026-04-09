@@ -1525,6 +1525,7 @@ button {
     background: transparent;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-end;
     padding: 0;
     gap: var(--space-lg);
     box-shadow: none;
@@ -1533,7 +1534,7 @@ button {
     transition: none;
     pointer-events: auto;
     z-index: auto;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .nav-menu.open {
@@ -1543,10 +1544,7 @@ button {
   }
 
   .nav-links {
-    flex-direction: row;
-    align-items: center;
-    gap: var(--space-xs);
-    flex-wrap: wrap;
+    display: none;
   }
 
   .nav-link {
